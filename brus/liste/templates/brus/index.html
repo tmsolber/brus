@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welkommen til Bruslista</title>
+    <style>
+        li {
+            display: inline-block;
+        }
+        .user {
+            height: 80px;
+            width: 80px;
+            backround-color: grey;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+ Brusliste for webkom.
+{% if listebla %}
+    <ul>
+    {% for person in listebla %}
+        <li><a href="/{{ person.id }}/penger"><div class="user">{{ person.name }}: {{ person.balance }}</div></a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Ingen personer i bruslisten.</p>
+{% endif %}
+
+
+
+</body>
+</html>
