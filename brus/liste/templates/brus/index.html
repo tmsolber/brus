@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +9,56 @@
             display: inline-block;
         }
     </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "liste/myCSS.css" %}" />
 </head>
 <body>
 <div class="container">
  <h1>Brusliste for webkom.</h1>
     <div class="col-lg-12">
     {% if persons %}
-        <ul>
+        <ul class="column">
+            <ul style="margin-bottom: 20px; " class="row topRow" >
+                <li> Personer </li> <li> Balanse </li> <li> </li> <li style="width: 250px;"> Sum du vil fylle på </li>
+            </ul>
+            <ul class="informationInput row">
+                <li> Legg til person: </li>
+                <li style="width: 300px;">
+                    <form action="{{ person.id }}/addPerson/" method="post">
+                        {% csrf_token %}
+                        {{ formAdd }}
+                        <button> add </button>
+                    </form>
+                </li>
+
+
+            </ul>
         {% for person in persons %}
-            <li><a class="btn btn-default" href="/{{ person.id }}/">{{ person.name }}</a></li>
+            <li>
+                <ul class = "row" >
+                    <li> <a class="person" href="/{{ person.id }}/">{{ person.name }}</a> </li>
+                    <li> {{ person.balance }} </li>
+                    <li>
+                        <form action="{{ person.id }}/betale/" method="post">
+                            {% csrf_token %}
+                            <button  type="submit"> Kjøp brus </button>
+
+                        </form>
+                    </li>
+                    <li style="width: 300px;">
+                        <form action="{{ person.id }}/deposit/" method="post">
+                            {% csrf_token %}
+                            {{ form1 }}
+                            <button type="submit">Fyll på med </button>
+                        </form>
+                    </li>
+
+                </ul>
+            </li>
         {% endfor %}
 
         </ul>
     {% else %}
-        <p>Ingen personer i bruslisten.</p>
+        <p>Ingen personer i bruslisten.</p>s
     {% endif %}
     </div>
 
