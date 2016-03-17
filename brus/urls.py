@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('brus.liste.urls')),
+    url(r'^login', 'django.contrib.auth.views.login', name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'brus.liste'
+    'brus.liste',
+    'crispy_forms'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -71,6 +72,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'brus.wsgi.application'
+
+ABAKUS_TOKEN = 'ffa15ee2b67710020838071b66927e6bb94351bb'
+
+AUTHENTICATION_BACKENDS = (
+    'abakus.auth.AbakusBackend',
+)
 
 
 # Database

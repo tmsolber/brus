@@ -8,7 +8,7 @@ from .forms import DepositForm, AddNameForm
 
 
 def index(request):
-    persons = Person.objects.all().order_by('-name')
+    persons = Person.objects.all().order_by('name')
     context = {
         'persons': persons,
         'form1': DepositForm(),
