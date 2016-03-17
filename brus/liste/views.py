@@ -8,7 +8,7 @@ from .forms import DepositForm, AddNameForm
 
 
 def index(request):
-    persons = Person.objects.all().order_by('name')
+    persons = Person.objects.all().order_by('-name')
     context = {
         'persons': persons,
         'form1': DepositForm(),
@@ -31,13 +31,15 @@ def pay(request, name_id):
 
 def deposit(request, name_id):
     person = Person.objects.get(id=name_id)
-    person.deposit_money( int(request.POST.get('deposit_amount')))
-
+    person.deposit_money(int(request.POST.get('deposit_amount')))
     return HttpResponseRedirect("/")
 
 def addPerson(request):
     Person.objects.create(name=request.POST.get('add_person'))
+    return HttpResponseRedirect("/")
 
+def deletePerson(request, name_id):
+    Person.objects.get(id=name_id).delete()
     return HttpResponseRedirect("/")
 
 
